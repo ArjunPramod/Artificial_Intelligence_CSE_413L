@@ -7,3 +7,7 @@
 2. Problem Set 2 
     - Question 1 [link](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_2/Question_1.py)
     - Question 2 [link](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_2/Question_2.py)
+3. Problem Set 3
+4. Problem Set 4
+5. Problem Set 5
+6. Problem Set 6
