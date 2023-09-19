@@ -22,4 +22,7 @@ This repository contains code for various problem sets in the Artificial Intelli
 ### Problem Set 5
 - [8 Puzzle State Generation with Heuristic Evaluation](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_5/8_Puzzle_State_Generation_with_Heuristic_Evaluation.py)
 
+### Problem Set 6
+- [Solve the 8-Puzzle using A* algorithm](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_6/astar_8_puzzle_solver.py)
+
 This repository contains the solutions to these problem sets for the Artificial Intelligence course. You can click on the links to access the code for each problem.
