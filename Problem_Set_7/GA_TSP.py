@@ -4,76 +4,80 @@ import random
 
 cities = {
     'A': (0, 0),
-    'B': (2, 4),
-    'C': (5, 2),
-    'D': (7, 5),
-    'E': (2, 7),
-    'F': (8, 8),
-    'G': (9, 6),
-    'H': (3, 3)
+    'B': (1, 3),
+    'C': (2, 1),
+    'D': (3, 6),
+    'E': (4, 2),
+    'F': (5, 5),
+    'G': (6, 0),
+    'H': (7, 4)
 }
 
-def total_distance(tour):
-    distance = 0
-    for i in range(len(tour) - 1):
-        city1, city2 = tour[i], tour[i + 1]
-        distance += ((cities[city1][0] - cities[city2][0]) ** 2 + (cities[city1][1] - cities[city2][1]) ** 2) ** 0.5
-    return distance
-
-def initial_population(pop_size):
+def initial_population(population_size):
     population = []
-    cities_list = list(cities.keys())
-    for _ in range(pop_size):
-        random.shuffle(cities_list)
-        population.append(cities_list[:])
+    for _ in range(population_size):
+        route = list(cities.keys())
+        random.shuffle(route)
+        population.append(route)
     return population
 
-def selection(population, num_parents):
-    selected_parents = []
-    for _ in range(num_parents):
-        tournament = random.sample(population, 3)
-        tournament.sort(key=lambda x: total_distance(x))
-        selected_parents.append(tournament[0])
-    return selected_parents
+def calculate_total_distance(route):
+    total_distance = 0
+    for i in range(len(route) - 1):
+        city1 = route[i]
+        city2 = route[i + 1]
+        total_distance += distance_between_cities(cities[city1], cities[city2])
+    return total_distance
+
+def distance_between_cities(city1, city2):
+    x1, y1 = city1
+    x2, y2 = city2
+    return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5
+
+def select_parents(population):
+    parent1, parent2 = random.sample(population, 2)
+    return parent1, parent2
 
 def crossover(parent1, parent2):
-    start, end = sorted(random.sample(range(len(parent1)), 2))
-    child = [''] * len(parent1)
+    start = random.randint(0, len(parent1) - 2)
+    end = random.randint(start + 1, len(parent1) - 1)
+    child = [None] * len(parent1)
     for i in range(start, end + 1):
         child[i] = parent1[i]
     remaining_cities = [city for city in parent2 if city not in child]
     j = 0
     for i in range(len(child)):
-        if child[i] == '':
+        if child[i] is None:
             child[i] = remaining_cities[j]
             j += 1
     return child
 
-def mutation(child):
-    idx1, idx2 = random.sample(range(len(child)), 2)
-    child[idx1], child[idx2] = child[idx2], child[idx1]
-    return child
+def mutate(route):
+    index1, index2 = random.sample(range(len(route)), 2)
+    route[index1], route[index2] = route[index2], route[index1]
 
-population_size = 100
-num_generations = 1000
-num_parents = 50
+def genetic_algorithm(num_generations, population_size):
+    population = initial_population(population_size)
+    for generation in range(num_generations):
+        population = sorted(population, key=lambda x: calculate_total_distance(x))
+        best_route = population[0]
+        print(f"Generation {generation}: Best distance = {calculate_total_distance(best_route)}")
+        new_population = [best_route]
 
-population = initial_population(population_size)
-for generation in range(num_generations):
-    parents = selection(population, num_parents)
-    new_population = parents.copy()
-    
-    while len(new_population) < population_size:
-        parent1, parent2 = random.sample(parents, 2)
-        child = crossover(parent1, parent2)
-        if random.random() < 0.2:  # Apply mutation with a low probability
-            child = mutation(child)
-        new_population.append(child)
-    
-    population = new_population
+        while len(new_population) < population_size:
+            parent1, parent2 = select_parents(population)
+            child = crossover(parent1, parent2)
+            if random.random() < 0.2:
+                mutate(child)
+            new_population.append(child)
 
+        population = new_population
+
+    return population[0]
 
 if __name__ == "__main__":
-    best_tour = min(population, key=lambda x: total_distance(x))
-    print("Best Tour:", best_tour)
-    print("Total Distance:", total_distance(best_tour))
+    num_generations = 100
+    population_size = 50
+    best_route = genetic_algorithm(num_generations, population_size)
+    print("Best Route:", best_route)
+    print("Best Distance:", calculate_total_distance(best_route))
