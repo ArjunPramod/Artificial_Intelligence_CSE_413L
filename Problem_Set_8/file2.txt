@@ -1,0 +1,4 @@
+This is an example of file2.
+It is also for comparison.
+File2 contains words and sentences.
+This is the second file.

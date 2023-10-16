@@ -1,0 +1,5 @@
+This is a sample text file containing various types of data.
+12345 67890 42 3.14 6.62607004e-34
+It includes numbers like 123 and 45678, as well as special characters: @#$%^&*()
+The number of words, characters, and numbers will be counted using the code.
+The end of the example.
