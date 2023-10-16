@@ -28,4 +28,8 @@ This repository contains code for various problem sets in the Artificial Intelli
 ### Problem Set 7
 - [Solving the Traveling Salesman Problem (TSP) using Genetic Algorithms (GA)](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_7/GA_TSP.py)
 
+### Problem Set 8
+- [Question 1](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_8/Question_1.py)
+- [Question 2](https://github.com/ArjunPramod/Artificial_Intelligence_CSE_413L/blob/main/Problem_Set_8/Question_2.py)
+
 This repository contains the solutions to these problem sets for the Artificial Intelligence course. You can click on the links to access the code for each problem.
